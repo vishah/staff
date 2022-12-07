@@ -44,30 +44,17 @@ export const login = (email, password) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
-            grant_type: 'password',
-            client_id: 2,
-            client_secret: "I1dRMtEcJrJPyeW0VAgI9FtsQyz0sWgukHTTj8I9",
-            username: email,
+            email: email,
             password: password,
-            scope: '*'
         };
 
-        let url = 'http://fina.mv/oauth/token';
+        let url = 'https://housing-api.stag.mpao.mv/auth/signin';
 
         axios.post(url,
             authData)
             .then(response => {
-                let expires_in_seconds = (new Date().getTime())/1000 + response.data.expires_in;
-                console.log("sdsdsdsdsd",response.data);
-                dispatch(authSuccess(response.data.access_token,
-                                     response.data.refresh_token,
-                                     response.data.expires_in,
-                                     expires_in_seconds,
-                                     response.data.user_role_admin,
-                                     response.data.user_role_moderator,
-                                     response.data.user_role_standard
+                dispatch(authSuccess(response.data.access_token
                                     ));
-                dispatch(checkAuthTimeout(response.data.expires_in));
             })
             .catch(err => {
                 console.log("err",err);
@@ -84,19 +71,9 @@ export const setAuthRedirectPath = (path) => {
     };
 };
 
-export const authCheckState = (accessToken, refreshToken, expiresIn, expiresInSeconds,
-                               userRoleAdmin, userRoleModerator, userRoleStandard) => {
+export const authCheckState = (accessToken) => {
     return dispatch => {
         if (!accessToken) {
-            dispatch(logout());
-        }
-
-        if (expiresInSeconds > (new Date().getTime())/1000  ) {
-            dispatch(authSuccess(accessToken, refreshToken, expiresIn, expiresInSeconds,
-                                 userRoleAdmin, userRoleModerator, userRoleStandard));
-            dispatch(checkAuthTimeout(expiresInSeconds - (new Date().getTime()/1000) ));
-        }
-        else {
             dispatch(logout());
         }
 

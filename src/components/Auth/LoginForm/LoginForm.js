@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 class LoginForm extends Component {
 
     state = {
-        tryCheckLogin:false
+        tryCheckLogin: false
     }
 
     handleSubmit = e => {
@@ -17,7 +17,7 @@ class LoginForm extends Component {
             if (!err) {
                 console.log('Received values of form: ', values);
                 this.props.login(values.username, values.password)
-                this.setState({tryCheckLogin:true})
+                this.setState({ tryCheckLogin: true })
             }
         });
     };
@@ -25,7 +25,6 @@ class LoginForm extends Component {
     render() {
         let authRedirect = null;
         if (this.props.isAuthenticated && this.state.tryCheckLogin) {
-            console.log("yayyy")
             authRedirect = <Redirect to="/" />
         }
         const { getFieldDecorator } = this.props.form;
@@ -39,7 +38,7 @@ class LoginForm extends Component {
                         })(
                             <Input
                                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="Username"
+                                placeholder="Email"
                                 size="large"
                             />,
                         )}
@@ -67,7 +66,7 @@ class LoginForm extends Component {
                             size="large"
                         >
                             Log in
-                    </Button>
+                        </Button>
                     </Form.Item>
                 </Form >
             </div>

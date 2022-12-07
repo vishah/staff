@@ -2,18 +2,11 @@ import React, { Component } from 'react';
 //import styles from './Auth.module.css';
 import { Row, Col, Card } from 'antd';
 import LoginForm from './LoginForm/LoginForm';
-import RegisterForm from './RegisterForm/RegisterForm';
 
 class Auth extends Component {
     state = {
         cardTitle: 'Login',
         currentForm: 'login'
-    }
-    goToRegisterPage = () => {
-        this.setState({
-            cardTitle: 'Register',
-            currentForm: 'register'
-        })
     }
     goToLoginPage = () => {
         this.setState({
@@ -24,12 +17,8 @@ class Auth extends Component {
 
     render() {
         let currForm = null;
-        if (this.state.currentForm === 'register') {
-            currForm = <RegisterForm login={this.goToLoginPage} />
-
-        }
-        else if (this.state.currentForm === 'login') {
-            currForm = <LoginForm register={this.goToRegisterPage} />
+        if (this.state.currentForm === 'login') {
+            currForm = <LoginForm />
         }
 
         return (
@@ -50,4 +39,3 @@ class Auth extends Component {
 }
 export default Auth;
 
-/*help={<div className={styles.Label}>Should be a valid password</div>}*/

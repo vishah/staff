@@ -9,18 +9,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import authReducer from './store/reducers/auth';
-import registerReducer from './store/reducers/register';
-import accountsReducer from './store/reducers/accounts';
-import usersReducer from './store/reducers/users';
-import loansReducer from './store/reducers/loans';
-import loanIntervalsReducer from './store/reducers/loanIntervals';
-import accountStatementReportReducer from './store/reducers/accountStatementReport';
-import allAccountsStatementReportReducer from './store/reducers/allAccountsStatementReport';
-import duesReportReducer from './store/reducers/duesReport';
-import allAccountsDuesReportReducer from './store/reducers/allAccountsDuesReport';
-import loansIssuedReportReducer from './store/reducers/loansIssuedReport';
+import staffReducer from './store/reducers/staff';
 
-import generalSettingsReducer from './store/reducers/generalSettings';
+
 
 import { saveState, loadState } from './localStorage';
 import throttle from 'lodash.throttle';
@@ -33,17 +24,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    register: registerReducer,
-    accounts: accountsReducer,
-    users: usersReducer,
-    loans: loansReducer,
-    loanIntervals: loanIntervalsReducer,
-    accountStatementReport: accountStatementReportReducer,
-    allAccountsStatementReport: allAccountsStatementReportReducer,
-    loansIssuedReport:loansIssuedReportReducer,
-    duesReport:duesReportReducer,
-    allAccountsDuesReport:allAccountsDuesReportReducer,
-    generalSettings:generalSettingsReducer
+    staff:staffReducer
 });
 
 const persistedState = loadState();
